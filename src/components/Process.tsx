@@ -1,5 +1,9 @@
 
+import { useState } from "react";
+
 const Process = () => {
+  const [selectedStep, setSelectedStep] = useState<number | null>(null);
+
   const steps = [
     {
       days: "Days 1-2",
@@ -41,25 +45,47 @@ const Process = () => {
           </p>
         </div>
         
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Timeline container */}
+          <div className="relative">
+            {/* Timeline line */}
+            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-cyan-300 to-green-300 rounded-full"></div>
+            
             {steps.map((step, index) => (
               <div 
                 key={index} 
-                className="relative animate-fade-in"
+                className={`relative flex items-center mb-16 animate-fade-in ${
+                  index % 2 === 0 ? 'justify-start' : 'justify-end'
+                }`}
                 style={{ animationDelay: `${index * 0.15}s` }}
               >
-                <div className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 border-l-4 border-gradient-to-b from-cyan-500 to-green-500 group hover:scale-105">
-                  <div className="flex items-start space-x-6">
-                    <div className="flex-shrink-0">
-                      <div className="w-14 h-14 bg-gradient-to-br from-cyan-500 to-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-110 transition-transform duration-300">
-                        {index + 1}
-                      </div>
+                {/* Timeline dot */}
+                <div 
+                  className="absolute left-1/2 transform -translate-x-1/2 w-6 h-6 bg-gradient-to-br from-cyan-500 to-green-500 rounded-full border-4 border-white shadow-lg cursor-pointer hover:scale-125 transition-transform duration-300 z-10"
+                  onClick={() => setSelectedStep(selectedStep === index ? null : index)}
+                ></div>
+                
+                {/* Content box */}
+                <div 
+                  className={`w-5/12 ${index % 2 === 0 ? 'pr-8' : 'pl-8'} cursor-pointer`}
+                  onClick={() => setSelectedStep(selectedStep === index ? null : index)}
+                >
+                  <div className="bg-white rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 group">
+                    <div className="text-sm font-semibold text-cyan-600 mb-2 tracking-wide uppercase">{step.days}</div>
+                    <h3 className="text-xl font-bold text-gray-900 mb-2">{step.title}</h3>
+                    
+                    {/* Expandable description */}
+                    <div className={`overflow-hidden transition-all duration-500 ${
+                      selectedStep === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                    }`}>
+                      <p className="text-gray-600 leading-relaxed pt-2 border-t border-gray-100">
+                        {step.description}
+                      </p>
                     </div>
-                    <div className="flex-1">
-                      <div className="text-sm font-semibold text-cyan-600 mb-3 tracking-wide uppercase">{step.days}</div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-4">{step.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                    
+                    {/* Click indicator */}
+                    <div className="text-xs text-cyan-500 mt-2 opacity-60 group-hover:opacity-100 transition-opacity">
+                      {selectedStep === index ? 'Click to collapse' : 'Click to expand'}
                     </div>
                   </div>
                 </div>

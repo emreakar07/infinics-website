@@ -21,14 +21,19 @@ const Hero = () => {
           />
         </div>
         
-        {/* Main headline */}
-        <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-6 animate-fade-in">
-          Infinics – AI Agent Dev Studio
-        </h1>
+        {/* Main headline - split into two lines */}
+        <div className="mb-6 animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-2">
+            Infinics
+          </h1>
+          <h2 className="text-4xl md:text-6xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent">
+            AI Agent Dev Studio
+          </h2>
+        </div>
         
         {/* Subheadline */}
         <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto animate-fade-in leading-relaxed">
-          We are an AI Agent Studio that builds and delivers tailored AI agents for business functions – in just <span className="font-bold text-cyan-600">14 days</span>.
+          From concept to production in <span className="font-bold text-cyan-600">14 days</span>.
         </p>
         
         {/* CTA Button */}
@@ -38,13 +43,13 @@ const Hero = () => {
             className="bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 transform"
           >
             <Zap className="mr-2 h-5 w-5" />
-            Start Your AI Agent Project
+            Start Your Project
           </Button>
         </div>
         
         {/* Trust indicator */}
         <p className="mt-8 text-sm text-gray-500 animate-fade-in">
-          ✓ No hidden costs • ✓ 14-day guarantee • ✓ Custom AI agents only
+          ✓ No hidden costs • ✓ 14-day guarantee • ✓ Custom solutions only
         </p>
       </div>
 
