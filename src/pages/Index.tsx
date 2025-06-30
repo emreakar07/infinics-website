@@ -4,6 +4,7 @@ import ValuePropositions from "@/components/ValuePropositions";
 import Process from "@/components/Process";
 import Solutions from "@/components/Solutions";
 import ROICalculator from "@/components/ROICalculator";
+import ContactForm from "@/components/ContactForm";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
@@ -15,6 +16,7 @@ const Index = () => {
       <Process />
       <Solutions />
       <ROICalculator />
+      <ContactForm />
       <FAQ />
       <Footer />
     </div>

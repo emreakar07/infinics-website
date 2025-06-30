@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Calculator, TrendingUp } from "lucide-react";
+import { Calculator, TrendingUp, Zap } from "lucide-react";
 
 const ROICalculator = () => {
   const [employees, setEmployees] = useState(10);
@@ -32,12 +32,22 @@ const ROICalculator = () => {
     <section className="py-20 bg-gradient-to-br from-cyan-50 to-green-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Calculate Your ROI
-          </h2>
-          <p className="text-xl text-gray-600">
-            See exactly how much you'll save with AI automation
+          <div className="flex items-center justify-center mb-4">
+            <Zap className="h-8 w-8 text-cyan-600 mr-3" />
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+              Boost Your Team's Productivity
+            </h2>
+          </div>
+          <p className="text-xl text-gray-600 mb-6">
+            Calculate how much efficiency and cost savings AI automation brings to your business
           </p>
+          <div className="bg-white rounded-lg p-6 max-w-2xl mx-auto shadow-lg">
+            <p className="text-lg text-gray-700">
+              <span className="font-bold text-cyan-600">Average Results:</span> Companies save 
+              <span className="font-bold text-green-600"> 8+ hours per employee weekly</span> and see 
+              <span className="font-bold text-green-600"> 300-500% ROI</span> within 6 months
+            </p>
+          </div>
         </div>
 
         <div className="max-w-4xl mx-auto">
@@ -110,7 +120,7 @@ const ROICalculator = () => {
               <CardHeader>
                 <CardTitle className="flex items-center text-xl">
                   <TrendingUp className="mr-2 h-5 w-5 text-green-600" />
-                  Your ROI Results
+                  Your Efficiency & Savings Results
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -138,16 +148,22 @@ const ROICalculator = () => {
 
                 <div className="text-center p-4 bg-gradient-to-r from-cyan-50 to-green-50 rounded-lg">
                   <div className="text-xl font-bold text-gray-800">
-                    Payback in {results.paybackMonths} months
+                    Full ROI in {results.paybackMonths} months
                   </div>
                   <div className="text-sm text-gray-600 mt-1">
-                    Investment: $15,000 (one-time)
+                    Investment: $15,000 (one-time setup)
                   </div>
                 </div>
 
-                <Button className="w-full bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-white">
-                  Start Your Project Today
-                </Button>
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h4 className="font-bold text-blue-800 mb-2">Productivity Benefits:</h4>
+                  <ul className="text-sm text-blue-700 space-y-1">
+                    <li>✓ {hoursSaved * employees} total hours saved weekly</li>
+                    <li>✓ 70% faster task completion</li>
+                    <li>✓ 90% reduction in manual errors</li>
+                    <li>✓ 24/7 automated operations</li>
+                  </ul>
+                </div>
               </CardContent>
             </Card>
           </div>
