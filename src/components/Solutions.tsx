@@ -57,8 +57,36 @@ const Solutions = () => {
       description: "Review analysis and dynamic pricing optimization for hospitality."
     },
     {
-      title: "Financial Planning Tools",
-      description: "Investment research, budget tracking, and financial advisory platforms."
+      title: "Marketing Budget & Expense Tracking",
+      description: "Smart platform for planning, tracking, and optimizing marketing budgets and expenses to maximize ROI and reduce waste."
+    },
+    {
+      title: "FundAI - Government Grants Matching Engine",
+      description: "AI-powered system that automatically matches your business with relevant government funding opportunities and grants based on your industry and needs."
+    },
+    {
+      title: "Personal Finance App",
+      description: "Comprehensive mobile application for managing personal finances, budgeting, expense tracking, and achieving financial goals with AI insights."
+    },
+    {
+      title: "AI-Based Investment Research Platform",
+      description: "Intelligent system for analyzing investment opportunities, market trends, and portfolio optimization with real-time data and predictive analytics."
+    },
+    {
+      title: "AI-Powered Document Sharing Platform",
+      description: "Secure document sharing with advanced permission controls, AI content analysis, access tracking, and automatic watermarking for complete data protection."
+    },
+    {
+      title: "Web and Telegram E-Commerce Platform",
+      description: "Multi-channel e-commerce solution with cryptocurrency payment integration, inventory sync, and seamless customer experience across platforms."
+    },
+    {
+      title: "Telegram E-Pin Sales Platform",
+      description: "Digital pin code sales and distribution platform integrated with Telegram for automated delivery and customer management."
+    },
+    {
+      title: "Telegram HangiKredi (Credit Advisor)",
+      description: "Smart financial advisor bot on Telegram providing personalized credit and loan recommendations based on user profiles and market conditions."
     },
     {
       title: "E-commerce Solutions",
