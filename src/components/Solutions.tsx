@@ -5,115 +5,103 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const Solutions = () => {
-  const aiSolutions = [
+  const businessSolutions = [
     {
-      title: "Intelligent Inventory Search Engine",
-      description: "AI-powered search system for efficient inventory management and optimization."
+      title: "Smart CRM System",
+      description: "Complete customer management with AI insights and automated workflows."
     },
     {
-      title: "Digital Recruitment System with AI Interview",
-      description: "Streamlined hiring platform with AI-powered candidate interviews and assessments."
+      title: "Project Management Platform",
+      description: "Track projects, manage teams, and monitor progress in one unified dashboard."
     },
     {
-      title: "AI-Powered Contract & Document Management",
-      description: "Intelligent system for analyzing and managing contracts and important documents."
+      title: "Digital Document Management",
+      description: "Secure document storage, sharing, and electronic signing solution."
     },
     {
-      title: "Call Center Conversation Analyzer",
-      description: "AI tool that analyzes call center interactions for quality assurance and insights."
+      title: "Compliance & Audit Platform",
+      description: "Automated compliance tracking and audit management for regulatory requirements."
     },
     {
-      title: "AI-Powered Sales Proposal Management",
-      description: "Intelligent system for creating, managing, and optimizing sales proposals."
-    },
-    {
-      title: "AI Bot Sales Training",
-      description: "Intelligent training system for sales teams using AI-powered scenarios and feedback."
+      title: "Quality Control System",
+      description: "Monitor and maintain quality standards across your operations."
     }
   ];
 
-  const enterpriseSolutions = [
+  const aiPoweredSolutions = [
     {
-      title: "Digital Audit System",
-      description: "Comprehensive platform for managing and automating audit processes and compliance."
+      title: "AI Recruitment Assistant",
+      description: "Automated candidate screening and AI-powered interview system."
     },
     {
-      title: "Marketing Budget & Expense Tracking",
-      description: "Platform for planning, tracking, and optimizing marketing budgets and expenses."
+      title: "Smart Inventory Manager",
+      description: "AI-driven inventory optimization and automated stock management."
     },
     {
-      title: "Quality Control Management System",
-      description: "End-to-end solution for quality assurance processes and standards compliance."
+      title: "Contract Analyzer",
+      description: "AI system that reviews and analyzes contracts for key terms and risks."
     },
     {
-      title: "Compliance Platform",
-      description: "Comprehensive solution for managing regulatory compliance and requirements."
+      title: "Sales Proposal Generator",
+      description: "Create winning proposals with AI assistance and templates."
     },
     {
-      title: "Web and Telegram E-Commerce Platform",
-      description: "Multi-channel e-commerce solution with cryptocurrency payment integration."
-    },
-    {
-      title: "Enterprise Slack Platform",
-      description: "Custom Slack implementation for secure enterprise communication and collaboration."
-    },
-    {
-      title: "CRM",
-      description: "Comprehensive customer relationship management system with advanced analytics."
-    },
-    {
-      title: "Project Management App",
-      description: "Comprehensive tool for planning, tracking, and managing projects and resources."
+      title: "Customer Service Bot",
+      description: "24/7 AI assistant for customer support and call center analytics."
     }
   ];
 
-  const analyticsSolutions = [
+  const industrySpecific = [
     {
-      title: "Guest Review Analysis System",
-      description: "AI-powered platform that analyzes customer feedback and reviews for actionable insights."
+      title: "Hotel & Restaurant Analytics",
+      description: "Review analysis and dynamic pricing optimization for hospitality."
     },
     {
-      title: "Hotel Price Analyzer",
-      description: "Analytics tool for optimizing hotel pricing strategies based on market data."
+      title: "Financial Planning Tools",
+      description: "Investment research, budget tracking, and financial advisory platforms."
     },
     {
-      title: "AI-Based Investment Research Platform",
-      description: "Intelligent system for analyzing investment opportunities and market trends."
+      title: "E-commerce Solutions",
+      description: "Multi-platform stores with payment processing and inventory sync."
     },
     {
-      title: "AI-Powered Survey and Experience Management",
-      description: "Intelligent platform for creating, managing, and analyzing customer surveys."
+      title: "Healthcare Management",
+      description: "Patient management, scheduling, and compliance tracking systems."
+    },
+    {
+      title: "Real Estate Platform",
+      description: "Property management, client tracking, and market analysis tools."
     }
   ];
 
-  const mobileSolutions = [
+  const mobileApps = [
     {
-      title: "Next-Generation Mobile Application Platform",
-      description: "Modern framework for developing cross-platform mobile applications with advanced features."
+      title: "Business Mobile Apps",
+      description: "Custom mobile applications for iOS and Android platforms."
     },
     {
-      title: "Telegram E-Pin Sales Platform",
-      description: "Digital pin code sales and distribution platform integrated with Telegram."
+      title: "Financial Apps",
+      description: "Personal finance, budgeting, and expense tracking mobile solutions."
     },
     {
-      title: "Personal Finance App",
-      description: "Mobile application for managing personal finances, budgeting, and financial goals."
+      title: "Telegram Bots",
+      description: "Custom Telegram bots for sales, customer service, and automation."
     }
   ];
 
   const renderSolutionAccordion = (solutions: any[], category: string) => (
-    <Accordion type="single" collapsible className="w-full space-y-2">
+    <Accordion type="single" collapsible className="w-full space-y-3">
       {solutions.map((solution, index) => (
         <AccordionItem 
           key={index} 
           value={`${category}-${index}`}
-          className="border border-gray-200 rounded-lg hover:shadow-md transition-all duration-300"
+          className="border border-gray-200 rounded-xl hover:shadow-lg transition-all duration-300 bg-white"
         >
-          <AccordionTrigger className="px-6 py-4 hover:no-underline hover:bg-gray-50 rounded-t-lg">
-            <span className="text-left font-semibold text-gray-900">{solution.title}</span>
+          <AccordionTrigger className="px-6 py-5 hover:no-underline hover:bg-gray-50 rounded-t-xl">
+            <span className="text-left font-semibold text-gray-900 text-lg">{solution.title}</span>
           </AccordionTrigger>
-          <AccordionContent className="px-6 pb-4">
-            <p className="text-gray-600 leading-relaxed">{solution.description}</p>
+          <AccordionContent className="px-6 pb-5">
+            <p className="text-gray-600 leading-relaxed text-base">{solution.description}</p>
           </AccordionContent>
         </AccordionItem>
       ))}
@@ -121,39 +109,55 @@ const Solutions = () => {
   );
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            What We Build
+            Solutions We Build
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We build and deliver AI-powered solutions in just 14 days
+            Custom AI agents and business solutions delivered in 14 days
           </p>
         </div>
 
-        <Tabs defaultValue="ai" className="max-w-6xl mx-auto">
-          <TabsList className="grid w-full grid-cols-4 mb-12 bg-gray-100">
-            <TabsTrigger value="ai" className="text-lg font-medium">AI Solutions</TabsTrigger>
-            <TabsTrigger value="enterprise" className="text-lg font-medium">Enterprise</TabsTrigger>
-            <TabsTrigger value="analytics" className="text-lg font-medium">Analytics</TabsTrigger>
-            <TabsTrigger value="mobile" className="text-lg font-medium">Mobile</TabsTrigger>
+        <Tabs defaultValue="business" className="max-w-6xl mx-auto">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 mb-12 bg-white shadow-lg rounded-xl p-2">
+            <TabsTrigger value="business" className="text-base font-medium rounded-lg">Business Tools</TabsTrigger>
+            <TabsTrigger value="ai" className="text-base font-medium rounded-lg">AI-Powered</TabsTrigger>
+            <TabsTrigger value="industry" className="text-base font-medium rounded-lg">Industry-Specific</TabsTrigger>
+            <TabsTrigger value="mobile" className="text-base font-medium rounded-lg">Mobile & Apps</TabsTrigger>
           </TabsList>
           
-          <TabsContent value="ai">
-            {renderSolutionAccordion(aiSolutions, "ai")}
+          <TabsContent value="business" className="mt-8">
+            <div className="mb-6 text-center">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">Essential Business Solutions</h3>
+              <p className="text-gray-600">Core tools every business needs to operate efficiently</p>
+            </div>
+            {renderSolutionAccordion(businessSolutions, "business")}
           </TabsContent>
           
-          <TabsContent value="enterprise">
-            {renderSolutionAccordion(enterpriseSolutions, "enterprise")}
+          <TabsContent value="ai" className="mt-8">
+            <div className="mb-6 text-center">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">AI-Powered Automation</h3>
+              <p className="text-gray-600">Intelligent solutions that work 24/7 to boost productivity</p>
+            </div>
+            {renderSolutionAccordion(aiPoweredSolutions, "ai")}
           </TabsContent>
           
-          <TabsContent value="analytics">
-            {renderSolutionAccordion(analyticsSolutions, "analytics")}
+          <TabsContent value="industry" className="mt-8">
+            <div className="mb-6 text-center">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">Industry-Tailored Solutions</h3>
+              <p className="text-gray-600">Specialized tools designed for specific business sectors</p>
+            </div>
+            {renderSolutionAccordion(industrySpecific, "industry")}
           </TabsContent>
           
-          <TabsContent value="mobile">
-            {renderSolutionAccordion(mobileSolutions, "mobile")}
+          <TabsContent value="mobile" className="mt-8">
+            <div className="mb-6 text-center">
+              <h3 className="text-2xl font-semibold text-gray-800 mb-2">Mobile & Communication</h3>
+              <p className="text-gray-600">Apps and bots that connect you with customers anywhere</p>
+            </div>
+            {renderSolutionAccordion(mobileApps, "mobile")}
           </TabsContent>
         </Tabs>
       </div>
