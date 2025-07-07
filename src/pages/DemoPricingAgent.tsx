@@ -336,12 +336,57 @@ const DemoPricingAgent = () => {
     
     if (jsonMatch) {
       try {
-        const pricingData = JSON.parse(jsonMatch[1]);
+        // Clean up common JSON formatting issues
+        let jsonString = jsonMatch[1]
+          .replace(/,\s*}/g, '}') // Remove trailing commas before closing braces
+          .replace(/,\s*]/g, ']') // Remove trailing commas before closing brackets
+          .replace(/'/g, '"') // Replace single quotes with double quotes
+          .replace(/(\w+):/g, '"$1":') // Add quotes around keys
+          .replace(/:\s*'([^']*)'/g, ': "$1"') // Fix single-quoted values
+          .replace(/"\s*"/g, '","') // Fix missing commas between strings
+          .replace(/}\s*{/g, '},{') // Fix missing commas between objects
+          .replace(/]\s*\[/g, '],[') // Fix missing commas between arrays
+          .replace(/\n\s*\n/g, '\n') // Remove empty lines
+          .replace(/,\s*,/g, ','); // Remove double commas
+        
+        // Try to parse the cleaned JSON
+        const pricingData = JSON.parse(jsonString);
+        
         // Remove the JSON block from the content
         const cleanContent = content.replace(jsonMatch[0], '').trim();
         return { pricingData, cleanContent };
       } catch (error) {
         console.error("Failed to parse pricing JSON:", error);
+        console.error("Attempted to parse:", jsonMatch[1]);
+        
+        // Try a more aggressive cleanup
+        try {
+          // Extract key-value pairs manually for common fields
+          const fallbackData: any = {};
+          
+          // Extract common fields using regex
+          const extractField = (fieldName: string, content: string) => {
+            const regex = new RegExp(`"?${fieldName}"?\\s*:\\s*"?([^",}\\n]+)"?`, 'i');
+            const match = content.match(regex);
+            return match ? match[1].trim() : null;
+          };
+          
+          fallbackData.roomType = extractField('roomType', jsonMatch[1]);
+          fallbackData.dates = extractField('dates', jsonMatch[1]);
+          fallbackData.totalPrice = parseFloat(extractField('totalPrice', jsonMatch[1]) || '0');
+          fallbackData.currency = extractField('currency', jsonMatch[1]) || '€';
+          
+          // Extract adults/children
+          const adultsMatch = jsonMatch[1].match(/"?adults"?\s*:\s*(\d+)/);
+          const childrenMatch = jsonMatch[1].match(/"?children"?\s*:\s*(\d+)/);
+          if (adultsMatch) fallbackData.adults = parseInt(adultsMatch[1]);
+          if (childrenMatch) fallbackData.children = parseInt(childrenMatch[1]);
+          
+          const cleanContent = content.replace(jsonMatch[0], '').trim();
+          return { pricingData: fallbackData, cleanContent };
+        } catch (fallbackError) {
+          console.error("Fallback parsing also failed:", fallbackError);
+        }
       }
     }
     
@@ -355,19 +400,28 @@ const DemoPricingAgent = () => {
     context += "IMPORTANT: When providing pricing information, structure your response in two parts:\n";
     context += "1. A JSON object with pricing data (wrapped in ```json code blocks)\n";
     context += "2. A natural language explanation\n\n";
-    context += "The JSON should include fields like:\n";
-    context += "- dates: string (e.g., '2025-07-05 to 2025-07-10')\n";
-    context += "- roomType: string (e.g., 'Standard Room Main Building')\n";
-    context += "- adults: number\n";
-    context += "- children: number\n";
-    context += "- childAges: array of numbers\n";
-    context += "- basePrice: number (total base price)\n";
-    context += "- discount: number (percentage if applicable)\n";
-    context += "- totalPrice: number (final total price)\n";
-    context += "- currency: string (e.g., '€' or 'EUR')\n";
-    context += "- breakdown: array of {label: string, value: number|string} - For 'Total Nights' use a number, not currency\n";
-    context += "- notes: array of strings\n\n";
-    context += "Example breakdown: [{label: 'Room Price per Night', value: 160}, {label: 'Total Nights', value: 5}, {label: 'Base Price', value: 800}]\n\n";
+    context += "CRITICAL JSON RULES:\n";
+    context += "- Use double quotes for all strings, never single quotes\n";
+    context += "- No trailing commas after the last item in objects or arrays\n";
+    context += "- All keys must be in double quotes\n";
+    context += "- Numbers should not be quoted\n";
+    context += "- Ensure proper comma separation between all elements\n\n";
+    context += "Required JSON structure:\n";
+    context += "```json\n";
+    context += "{\n";
+    context += '  "dates": "2025-07-05 to 2025-07-10",\n';
+    context += '  "roomType": "Standard Room Main Building",\n';
+    context += '  "adults": 2,\n';
+    context += '  "children": 1,\n';
+    context += '  "totalPrice": 800,\n';
+    context += '  "currency": "€",\n';
+    context += '  "breakdown": [\n';
+    context += '    {"label": "Room Price per Night", "value": 160},\n';
+    context += '    {"label": "Total Nights", "value": 5},\n';
+    context += '    {"label": "Base Price", "value": 800}\n';
+    context += '  ]\n';
+    context += "}\n";
+    context += "```\n\n";
     
     if (pricingRules.length > 0) {
       context += `=== PRICING RULES AND CALCULATIONS ===\n`;

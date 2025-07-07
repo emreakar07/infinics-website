@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Calendar, MessageSquare, Building, Users } from "lucide-react";
+import { Calendar, MessageSquare, Building, Users, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { initEmailJS, sendContactForm } from "@/lib/emailjs";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -16,13 +17,19 @@ const ContactForm = () => {
     timeline: ""
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    initEmailJS();
+  }, []);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Basic validation
@@ -35,19 +42,34 @@ const ContactForm = () => {
       return;
     }
 
-    // Simulate form submission
-    toast({
-      title: "Request Submitted Successfully! 🎉",
-      description: "We'll contact you within 24 hours to schedule your demo session.",
-    });
+    setIsSubmitting(true);
 
-    // Reset form
-    setFormData({
-      name: "",
-      email: "",
-      problems: "",
-      timeline: ""
-    });
+    try {
+      // Send email via EmailJS
+      await sendContactForm(formData);
+      
+      toast({
+        title: "Request Submitted Successfully! 🎉",
+        description: "We'll contact you within 24 hours to schedule your demo session.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        problems: "",
+        timeline: ""
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error sending your request. Please try again or contact us directly.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -87,6 +109,7 @@ const ContactForm = () => {
                       onChange={(e) => handleInputChange("name", e.target.value)}
                       placeholder="John Doe"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div className="space-y-2">
@@ -98,13 +121,18 @@ const ContactForm = () => {
                       onChange={(e) => handleInputChange("email", e.target.value)}
                       placeholder="john@example.com"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label>Implementation Timeline</Label>
-                  <Select value={formData.timeline} onValueChange={(value) => handleInputChange("timeline", value)}>
+                  <Select 
+                    value={formData.timeline} 
+                    onValueChange={(value) => handleInputChange("timeline", value)}
+                    disabled={isSubmitting}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="When do you need this?" />
                     </SelectTrigger>
@@ -126,6 +154,7 @@ const ContactForm = () => {
                     placeholder="Tell us about the manual processes, repetitive tasks, or inefficiencies you'd like to automate. What takes too much time in your daily operations?"
                     className="min-h-[120px]"
                     required
+                    disabled={isSubmitting}
                   />
                   <p className="text-sm text-gray-500">
                     The more details you provide, the better we can prepare for your demo session.
@@ -136,9 +165,19 @@ const ContactForm = () => {
                   <Button 
                     type="submit" 
                     className="w-full bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-white py-3 text-lg"
+                    disabled={isSubmitting}
                   >
-                    <MessageSquare className="mr-2 h-5 w-5" />
-                    Schedule My Free Strategy Session
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      <>
+                        <MessageSquare className="mr-2 h-5 w-5" />
+                        Schedule My Free Strategy Session
+                      </>
+                    )}
                   </Button>
                   <p className="text-center text-gray-500 mt-3 text-sm">
                     No commitment required • 30-minute session • Get custom recommendations

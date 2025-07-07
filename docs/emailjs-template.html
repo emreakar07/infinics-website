@@ -1,0 +1,93 @@
+<!-- 
+  EmailJS Template Example for Infinics Contact Form
+  
+  Copy this template to your EmailJS account:
+  1. Go to Email Templates in your EmailJS dashboard
+  2. Create a new template
+  3. Use this HTML in the template editor
+  4. Subject line suggestion: "New Contact Form Submission - {{from_name}}"
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      background: linear-gradient(to right, #06b6d4, #10b981);
+      color: white;
+      padding: 20px;
+      border-radius: 8px 8px 0 0;
+      text-align: center;
+    }
+    .content {
+      background: #f7f7f7;
+      padding: 30px;
+      border-radius: 0 0 8px 8px;
+    }
+    .field {
+      margin-bottom: 20px;
+    }
+    .label {
+      font-weight: bold;
+      color: #555;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .value {
+      background: white;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    .message {
+      white-space: pre-wrap;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 20px;
+      color: #888;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>New Contact Form Submission</h2>
+    <p>Infinics AI Agent Dev Studio</p>
+  </div>
+  
+  <div class="content">
+    <div class="field">
+      <span class="label">Name:</span>
+      <div class="value">{{from_name}}</div>
+    </div>
+    
+    <div class="field">
+      <span class="label">Email:</span>
+      <div class="value">{{from_email}}</div>
+    </div>
+    
+    <div class="field">
+      <span class="label">Implementation Timeline:</span>
+      <div class="value">{{timeline}}</div>
+    </div>
+    
+    <div class="field">
+      <span class="label">Current Challenges:</span>
+      <div class="value message">{{message}}</div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>This form was submitted from infinics.ai</p>
+  </div>
+</body>
+</html> 

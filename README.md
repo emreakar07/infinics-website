@@ -51,11 +51,34 @@ The project is configured for deployment on Vercel. Simply connect your GitHub r
 
 ### Environment Variables
 
-For the demo features to work, you need to set up the following environment variable:
+Copy `.env.example` to `.env` and configure the following:
+
+#### EmailJS Configuration (Required for Contact Form)
+
+For detailed setup instructions, see [docs/EMAILJS_SETUP.md](docs/EMAILJS_SETUP.md).
+
+Quick setup:
+1. Sign up for a free account at [EmailJS](https://www.emailjs.com)
+2. Create an email service (Gmail, Outlook, etc.)
+3. Create an email template (see [docs/emailjs-template.html](docs/emailjs-template.html))
+4. Add these to your `.env` file:
+
+```
+VITE_EMAILJS_PUBLIC_KEY=your_emailjs_public_key
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_CONTACT_EMAIL=your-email@example.com
+```
+
+#### OpenAI Configuration (Optional for Demos)
 
 ```
 VITE_OPENAI_API_KEY=your_openai_api_key_here
 ```
+
+### Vercel Deployment
+
+Add the same environment variables in your Vercel project settings under Settings → Environment Variables.
 
 ## 🎨 Project Structure
 

@@ -352,12 +352,61 @@ const DemoMaintenanceAgent = () => {
     
     if (jsonMatch) {
       try {
-        const maintenanceData = JSON.parse(jsonMatch[1]);
+        // Clean up common JSON formatting issues
+        let jsonString = jsonMatch[1]
+          .replace(/,\s*}/g, '}') // Remove trailing commas before closing braces
+          .replace(/,\s*]/g, ']') // Remove trailing commas before closing brackets
+          .replace(/'/g, '"') // Replace single quotes with double quotes
+          .replace(/(\w+):/g, '"$1":') // Add quotes around keys
+          .replace(/:\s*'([^']*)'/g, ': "$1"') // Fix single-quoted values
+          .replace(/"\s*"/g, '","') // Fix missing commas between strings
+          .replace(/}\s*{/g, '},{') // Fix missing commas between objects
+          .replace(/]\s*\[/g, '],[') // Fix missing commas between arrays
+          .replace(/\n\s*\n/g, '\n') // Remove empty lines
+          .replace(/,\s*,/g, ','); // Remove double commas
+        
+        // Try to parse the cleaned JSON
+        const maintenanceData = JSON.parse(jsonString);
+        
         // Remove the JSON block from the content
         const cleanContent = content.replace(jsonMatch[0], '').trim();
         return { maintenanceData, cleanContent };
       } catch (error) {
         console.error("Failed to parse maintenance JSON:", error);
+        console.error("Attempted to parse:", jsonMatch[1]);
+        
+        // Try a more aggressive cleanup
+        try {
+          // Extract key-value pairs manually for common fields
+          const fallbackData: any = {};
+          
+          // Extract common fields using regex
+          const extractField = (fieldName: string, content: string) => {
+            const regex = new RegExp(`"?${fieldName}"?\\s*:\\s*"?([^",}\\n]+)"?`, 'i');
+            const match = content.match(regex);
+            return match ? match[1].trim() : null;
+          };
+          
+          fallbackData.issue = extractField('issue', jsonMatch[1]);
+          fallbackData.severity = extractField('severity', jsonMatch[1]);
+          fallbackData.category = extractField('category', jsonMatch[1]);
+          fallbackData.estimatedTime = extractField('estimatedTime', jsonMatch[1]);
+          fallbackData.difficulty = extractField('difficulty', jsonMatch[1]);
+          
+          // Try to extract arrays
+          const toolsMatch = jsonMatch[1].match(/"?requiredTools"?\s*:\s*\[(.*?)\]/s);
+          if (toolsMatch) {
+            fallbackData.requiredTools = toolsMatch[1]
+              .split(',')
+              .map(tool => tool.trim().replace(/['"]/g, ''))
+              .filter(tool => tool.length > 0);
+          }
+          
+          const cleanContent = content.replace(jsonMatch[0], '').trim();
+          return { maintenanceData: fallbackData, cleanContent };
+        } catch (fallbackError) {
+          console.error("Fallback parsing also failed:", fallbackError);
+        }
       }
     }
     
@@ -371,16 +420,27 @@ const DemoMaintenanceAgent = () => {
     context += "IMPORTANT: When providing maintenance guidance, structure your response in two parts:\n";
     context += "1. A JSON object with maintenance data (wrapped in ```json code blocks)\n";
     context += "2. A natural language explanation\n\n";
-    context += "The JSON should include fields like:\n";
-    context += "- issue: string (the identified problem)\n";
-    context += "- severity: string ('low', 'medium', 'high', 'critical')\n";
-    context += "- category: string (type of maintenance needed)\n";
-    context += "- estimatedTime: string (time to complete)\n";
-    context += "- difficulty: string ('easy', 'moderate', 'advanced', 'expert')\n";
-    context += "- requiredTools: array of strings\n";
-    context += "- safetyPrecautions: array of strings\n";
-    context += "- steps: array of {step: number, action: string, warning?: string}\n";
-    context += "- preventiveMeasures: array of strings\n\n";
+    context += "CRITICAL JSON RULES:\n";
+    context += "- Use double quotes for all strings, never single quotes\n";
+    context += "- No trailing commas after the last item in objects or arrays\n";
+    context += "- All keys must be in double quotes\n";
+    context += "- Numbers should not be quoted\n";
+    context += "- Ensure proper comma separation between all elements\n\n";
+    context += "Required JSON structure:\n";
+    context += "```json\n";
+    context += "{\n";
+    context += '  "issue": "AC unit not cooling properly",\n';
+    context += '  "severity": "medium",\n';
+    context += '  "category": "HVAC Maintenance",\n';
+    context += '  "estimatedTime": "30-45 minutes",\n';
+    context += '  "difficulty": "moderate",\n';
+    context += '  "requiredTools": ["Screwdriver", "Multimeter"],\n';
+    context += '  "safetyPrecautions": ["Turn off power at breaker"],\n';
+    context += '  "steps": [\n';
+    context += '    {"step": 1, "action": "Check air filter", "warning": "Use protective gear"}\n';
+    context += '  ]\n';
+    context += "}\n";
+    context += "```\n\n";
     
     if (maintenanceRules.length > 0) {
       context += `=== TROUBLESHOOTING RULES AND PROCEDURES ===\n`;
