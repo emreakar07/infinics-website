@@ -51,10 +51,10 @@ const DemoShowcase = () => {
             Live Demo
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
-            Try Our AI Agents
+            Try Our AI Agents - Live Demo
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Experience the power of custom AI agents. Test drive our demo agents and see how they can transform your business operations.
+            Experience two of our most popular AI agents in action. These interactive demos showcase how our custom AI solutions can transform your business operations.
           </p>
         </div>
 
@@ -105,16 +105,12 @@ const DemoShowcase = () => {
         {/* Bottom CTA */}
         <div className="text-center animate-fade-in">
           <p className="text-gray-600 mb-4">
-            Want a custom AI agent for your specific needs?
+            These are just 2 examples from our extensive AI agent suite. Explore all our solutions below.
           </p>
-          <Button 
-            variant="outline"
-            size="lg"
-            className="border-2 border-gradient-to-r from-cyan-500 to-green-500 hover:bg-gradient-to-r hover:from-cyan-500 hover:to-green-500 hover:text-white transition-all duration-300"
-          >
-            <Sparkles className="mr-2 h-5 w-5" />
-            Build Your Custom Agent
-          </Button>
+          <div className="flex items-center justify-center gap-2 text-cyan-600">
+            <span className="text-sm font-medium">Scroll to see all AI agents</span>
+            <ArrowRight className="h-4 w-4 animate-pulse" />
+          </div>
         </div>
       </div>
     </section>

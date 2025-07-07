@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,9 +12,6 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
-    industry: "",
-    companySize: "",
     problems: "",
     timeline: ""
   });
@@ -30,10 +26,10 @@ const ContactForm = () => {
     e.preventDefault();
     
     // Basic validation
-    if (!formData.name || !formData.email || !formData.company || !formData.problems) {
+    if (!formData.name || !formData.email || !formData.problems) {
       toast({
         title: "Please fill in all required fields",
-        description: "Name, email, company, and problem description are required.",
+        description: "Name, email, and problem description are required.",
         variant: "destructive"
       });
       return;
@@ -49,16 +45,13 @@ const ContactForm = () => {
     setFormData({
       name: "",
       email: "",
-      company: "",
-      industry: "",
-      companySize: "",
       problems: "",
       timeline: ""
     });
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white to-gray-50">
+    <section id="contact" className="py-20 bg-gradient-to-br from-white to-gray-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
@@ -103,75 +96,25 @@ const ContactForm = () => {
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      placeholder="john@company.com"
+                      placeholder="john@example.com"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="company">Company Name *</Label>
-                    <Input
-                      id="company"
-                      value={formData.company}
-                      onChange={(e) => handleInputChange("company", e.target.value)}
-                      placeholder="Your Company Ltd."
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Industry</Label>
-                    <Select value={formData.industry} onValueChange={(value) => handleInputChange("industry", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your industry" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="manufacturing">Manufacturing</SelectItem>
-                        <SelectItem value="healthcare">Healthcare</SelectItem>
-                        <SelectItem value="finance">Finance & Banking</SelectItem>
-                        <SelectItem value="retail">Retail & E-commerce</SelectItem>
-                        <SelectItem value="logistics">Logistics & Supply Chain</SelectItem>
-                        <SelectItem value="real-estate">Real Estate</SelectItem>
-                        <SelectItem value="education">Education</SelectItem>
-                        <SelectItem value="technology">Technology</SelectItem>
-                        <SelectItem value="consulting">Consulting Services</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label>Company Size</Label>
-                    <Select value={formData.companySize} onValueChange={(value) => handleInputChange("companySize", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select company size" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1-10">1-10 employees</SelectItem>
-                        <SelectItem value="11-50">11-50 employees</SelectItem>
-                        <SelectItem value="51-200">51-200 employees</SelectItem>
-                        <SelectItem value="201-500">201-500 employees</SelectItem>
-                        <SelectItem value="500+">500+ employees</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <Label>Implementation Timeline</Label>
-                    <Select value={formData.timeline} onValueChange={(value) => handleInputChange("timeline", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="When do you need this?" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="asap">ASAP (Within 1 month)</SelectItem>
-                        <SelectItem value="quarter">This quarter (1-3 months)</SelectItem>
-                        <SelectItem value="half-year">Next 6 months</SelectItem>
-                        <SelectItem value="planning">Just planning ahead</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                <div className="space-y-2">
+                  <Label>Implementation Timeline</Label>
+                  <Select value={formData.timeline} onValueChange={(value) => handleInputChange("timeline", value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="When do you need this?" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="asap">ASAP (Within 1 month)</SelectItem>
+                      <SelectItem value="quarter">This quarter (1-3 months)</SelectItem>
+                      <SelectItem value="half-year">Next 6 months</SelectItem>
+                      <SelectItem value="planning">Just planning ahead</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="space-y-2">

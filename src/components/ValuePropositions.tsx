@@ -55,7 +55,7 @@ const ValuePropositions = () => {
             Proven Business Results
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-            Why Smart Businesses 
+            Need a Custom AI Agent?
             <span className="block bg-gradient-to-r from-cyan-600 to-green-600 bg-clip-text text-transparent">
               Choose Infinics
             </span>
