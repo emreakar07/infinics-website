@@ -11,7 +11,7 @@ interface ChatCompletionResponse {
   }>;
 }
 
-export async function callOpenAIWithHistory(systemPrompt: string, messages: ChatCompletionMessage[]): Promise<string> {
+export async function callOpenAIWithHistory(systemPrompt: string, messages: ChatCompletionMessage[], options?: { model?: string; temperature?: number }): Promise<string> {
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
   
   if (!apiKey) {
@@ -35,9 +35,9 @@ export async function callOpenAIWithHistory(systemPrompt: string, messages: Chat
         "Authorization": `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: "gpt-4o-mini",
+        model: options?.model || "gpt-4o-mini",
         messages: allMessages,
-        temperature: 0.7,
+        temperature: options?.temperature ?? 0.7,
         max_tokens: 4096
       })
     });

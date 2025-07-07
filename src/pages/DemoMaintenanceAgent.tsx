@@ -8,6 +8,7 @@ import { Upload, FileText, Send, Bot, User, ChevronLeft, Sparkles, X, Eye, EyeOf
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { callOpenAIWithHistory, type ChatCompletionMessage } from "@/lib/openai";
+import { convertDocumentToMarkdown } from "@/lib/documentConverter";
 import MaintenanceDisplay from "@/components/MaintenanceDisplay";
 
 interface UploadedFile {
@@ -177,65 +178,27 @@ const DemoMaintenanceAgent = () => {
       }
 
       const content = await file.text();
-      const markdown = convertToMarkdown(file, content);
       
+      // Show loading state while converting
       setUploadedFiles(prev => [...prev, {
         name: file.name,
         content,
-        markdown,
+        markdown: "Converting document...",
         size: file.size,
         type: file.type,
         tags: []
       }]);
+      
+      // Convert using AI
+      const markdown = await convertDocumentToMarkdown(file, content);
+      
+      // Update with converted markdown
+      setUploadedFiles(prev => prev.map(f => 
+        f.name === file.name ? { ...f, markdown } : f
+      ));
     }
   };
 
-  const convertToMarkdown = (file: File, content: string): string => {
-    let markdown = `# ${file.name}\n\n`;
-    
-    if (file.type === "text/csv" || file.name.endsWith(".csv")) {
-      // Convert CSV to markdown table
-      const lines = content.split('\n').filter(line => line.trim());
-      if (lines.length > 0) {
-        // Parse CSV properly handling quoted values
-        const parseCSVLine = (line: string) => {
-          const result = [];
-          let current = '';
-          let inQuotes = false;
-          
-          for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-            if (char === '"') {
-              inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-              result.push(current.trim());
-              current = '';
-            } else {
-              current += char;
-            }
-          }
-          result.push(current.trim());
-          return result;
-        };
-        
-        const headers = parseCSVLine(lines[0]);
-        markdown += '| ' + headers.join(' | ') + ' |\n';
-        markdown += '|' + headers.map(() => ' --- ').join('|') + '|\n';
-        
-        for (let i = 1; i < lines.length; i++) {
-          const cells = parseCSVLine(lines[i]);
-          if (cells.length === headers.length) {
-            markdown += '| ' + cells.join(' | ') + ' |\n';
-          }
-        }
-      }
-    } else {
-      // For other text files, just add the content
-      markdown += '```\n' + content + '\n```';
-    }
-    
-    return markdown;
-  };
 
   const handleAddTag = (fileIndex: number) => {
     if (newTag.trim() && uploadedFiles[fileIndex]) {
@@ -747,11 +710,18 @@ const DemoMaintenanceAgent = () => {
 
                       {/* Markdown Preview */}
                       <div className="h-[300px] w-full rounded-md border p-4 overflow-y-auto">
-                        <div className="prose prose-sm max-w-none">
-                          <pre className="whitespace-pre-wrap text-xs">
-                            {uploadedFiles[activeFileIndex].markdown}
-                          </pre>
-                        </div>
+                        {uploadedFiles[activeFileIndex].markdown === "Converting document..." ? (
+                          <div className="flex flex-col items-center justify-center h-full">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600"></div>
+                            <p className="mt-4 text-sm text-gray-600">Converting document with AI...</p>
+                          </div>
+                        ) : (
+                          <div className="prose prose-sm max-w-none">
+                            <pre className="whitespace-pre-wrap text-xs">
+                              {uploadedFiles[activeFileIndex].markdown}
+                            </pre>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}

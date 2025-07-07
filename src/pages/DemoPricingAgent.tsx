@@ -8,6 +8,7 @@ import { Upload, FileText, Send, Bot, User, ChevronLeft, Sparkles, X, Eye, EyeOf
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { callOpenAIWithHistory, type ChatCompletionMessage } from "@/lib/openai";
+import { convertDocumentToMarkdown } from "@/lib/documentConverter";
 import PricingDisplay from "@/components/PricingDisplay";
 
 interface UploadedFile {
@@ -43,6 +44,9 @@ const industryTemplates: IndustryTemplate[] = [
     name: "Hotels & Resorts",
     icon: "🏨",
     rules: [
+      "CRITICAL: When prices show 'pp', 'per person', or 'pp in dbl', multiply the price by the number of people",
+      "For per-person pricing: Total Room Cost = Price per person × Number of adults",
+      "Example: €160 pp in dbl with 2 adults = €160 × 2 = €320 per night total",
       "Ask for the exact check-in and check-out dates",
       "Ask how many adults and children will be staying",
       "Ask the ages of all children (as child pricing often varies by age)",
@@ -161,65 +165,27 @@ const DemoPricingAgent = () => {
       }
 
       const content = await file.text();
-      const markdown = convertToMarkdown(file, content);
       
+      // Show loading state while converting
       setUploadedFiles(prev => [...prev, {
         name: file.name,
         content,
-        markdown,
+        markdown: "Converting document...",
         size: file.size,
         type: file.type,
         tags: []
       }]);
+      
+      // Convert using AI
+      const markdown = await convertDocumentToMarkdown(file, content);
+      
+      // Update with converted markdown
+      setUploadedFiles(prev => prev.map(f => 
+        f.name === file.name ? { ...f, markdown } : f
+      ));
     }
   };
 
-  const convertToMarkdown = (file: File, content: string): string => {
-    let markdown = `# ${file.name}\n\n`;
-    
-    if (file.type === "text/csv" || file.name.endsWith(".csv")) {
-      // Convert CSV to markdown table
-      const lines = content.split('\n').filter(line => line.trim());
-      if (lines.length > 0) {
-        // Parse CSV properly handling quoted values
-        const parseCSVLine = (line: string) => {
-          const result = [];
-          let current = '';
-          let inQuotes = false;
-          
-          for (let i = 0; i < line.length; i++) {
-            const char = line[i];
-            if (char === '"') {
-              inQuotes = !inQuotes;
-            } else if (char === ',' && !inQuotes) {
-              result.push(current.trim());
-              current = '';
-            } else {
-              current += char;
-            }
-          }
-          result.push(current.trim());
-          return result;
-        };
-        
-        const headers = parseCSVLine(lines[0]);
-        markdown += '| ' + headers.join(' | ') + ' |\n';
-        markdown += '|' + headers.map(() => ' --- ').join('|') + '|\n';
-        
-        for (let i = 1; i < lines.length; i++) {
-          const cells = parseCSVLine(lines[i]);
-          if (cells.length === headers.length) {
-            markdown += '| ' + cells.join(' | ') + ' |\n';
-          }
-        }
-      }
-    } else {
-      // For other text files, just add the content
-      markdown += '```\n' + content + '\n```';
-    }
-    
-    return markdown;
-  };
 
   const handleAddTag = (fileIndex: number) => {
     if (newTag.trim() && uploadedFiles[fileIndex]) {
@@ -394,7 +360,7 @@ const DemoPricingAgent = () => {
   };
 
   const buildContext = () => {
-    let context = "You are a pricing agent AI assistant for a hotel/resort. ";
+    let context = "You are a pricing agent AI assistant. ";
     context += "You have access to pricing data and should help users with booking inquiries.\n\n";
     
     context += "IMPORTANT: When providing pricing information, structure your response in two parts:\n";
@@ -406,29 +372,32 @@ const DemoPricingAgent = () => {
     context += "- All keys must be in double quotes\n";
     context += "- Numbers should not be quoted\n";
     context += "- Ensure proper comma separation between all elements\n\n";
-    context += "Required JSON structure:\n";
+    context += "Required JSON structure (example shows per-person pricing calculation):\n";
     context += "```json\n";
     context += "{\n";
     context += '  "dates": "2025-07-05 to 2025-07-10",\n';
     context += '  "roomType": "Standard Room Main Building",\n';
     context += '  "adults": 2,\n';
-    context += '  "children": 1,\n';
-    context += '  "totalPrice": 800,\n';
+    context += '  "children": 0,\n';
+    context += '  "totalPrice": 1600,\n';
     context += '  "currency": "€",\n';
     context += '  "breakdown": [\n';
-    context += '    {"label": "Room Price per Night", "value": 160},\n';
-    context += '    {"label": "Total Nights", "value": 5},\n';
-    context += '    {"label": "Base Price", "value": 800}\n';
+    context += '    {"label": "Price per Person per Night", "value": 160},\n';
+    context += '    {"label": "Number of Adults", "value": 2},\n';
+    context += '    {"label": "Nights", "value": 5},\n';
+    context += '    {"label": "Calculation", "value": "160 × 2 × 5"},\n';
+    context += '    {"label": "Total Price", "value": 1600}\n';
     context += '  ]\n';
     context += "}\n";
     context += "```\n\n";
     
     if (pricingRules.length > 0) {
-      context += `=== PRICING RULES AND CALCULATIONS ===\n`;
+      context += `=== CRITICAL PRICING RULES - YOU MUST FOLLOW THESE ===\n`;
+      context += `The following rules define how prices should be calculated. Pay special attention to any rules about per-person pricing:\n\n`;
       pricingRules.forEach((rule, index) => {
-        context += `Rule ${index + 1}: ${rule.text}\n`;
+        context += `RULE ${index + 1}: ${rule.text}\n`;
       });
-      context += `\n`;
+      context += `\nIMPORTANT: Apply ALL the above rules when calculating prices. If a rule mentions 'per person' or 'pp', you MUST multiply by the number of people.\n\n`;
     }
     
     if (uploadedFiles.length > 0) {
@@ -561,7 +530,7 @@ const DemoPricingAgent = () => {
                   Define Pricing Rules
                 </CardTitle>
                 <CardDescription>
-                  Add rules one by one or select an industry template
+                  Add pricing calculation rules (e.g., "Prices with 'pp' are per person") or select a template
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -627,7 +596,7 @@ const DemoPricingAgent = () => {
                   <Label className="text-sm font-medium mb-2 block">Add New Rule</Label>
                   <div className="flex gap-2">
                     <Input
-                      placeholder="e.g., Apply 10% discount for stays longer than 7 nights"
+                      placeholder="e.g., Prices marked 'pp' are per person - multiply by number of guests"
                       value={newRule}
                       onChange={(e) => setNewRule(e.target.value)}
                       onKeyPress={(e) => {
@@ -728,11 +697,18 @@ const DemoPricingAgent = () => {
 
                       {/* Markdown Preview */}
                       <div className="h-[300px] w-full rounded-md border p-4 overflow-y-auto">
-                        <div className="prose prose-sm max-w-none">
-                          <pre className="whitespace-pre-wrap text-xs">
-                            {uploadedFiles[activeFileIndex].markdown}
-                          </pre>
-                        </div>
+                        {uploadedFiles[activeFileIndex].markdown === "Converting document..." ? (
+                          <div className="flex flex-col items-center justify-center h-full">
+                            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-cyan-600"></div>
+                            <p className="mt-4 text-sm text-gray-600">Converting document with AI...</p>
+                          </div>
+                        ) : (
+                          <div className="prose prose-sm max-w-none">
+                            <pre className="whitespace-pre-wrap text-xs">
+                              {uploadedFiles[activeFileIndex].markdown}
+                            </pre>
+                          </div>
+                        )}
                       </div>
                     </div>
                   )}
