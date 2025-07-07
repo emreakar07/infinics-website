@@ -129,7 +129,7 @@ const ValuePropositions = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-xs font-bold">B</div>
               <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold">C</div>
             </div>
-            <span className="text-gray-700 font-medium">Join 500+ successful businesses</span>
+            <span className="text-gray-700 font-medium">AI-powered solutions for real business problems.</span>
           </div>
         </div>
       </div>

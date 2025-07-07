@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { CheckCircle, Zap, Rocket, Target, ArrowRight, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -144,7 +144,7 @@ const Process = () => {
             <div className="space-y-6 animate-fade-in">
               <div className="flex items-center gap-4">
                 <div className={`p-4 bg-gradient-to-br ${steps[activeStep].color} rounded-2xl shadow-lg`}>
-                  <steps[activeStep].icon className="h-8 w-8 text-white" />
+                  {React.createElement(steps[activeStep].icon, { className: "h-8 w-8 text-white" })}
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
@@ -182,7 +182,7 @@ const Process = () => {
             <div className={`relative p-8 rounded-3xl bg-gradient-to-br ${steps[activeStep].bgColor} shadow-xl animate-fade-in`}>
               <div className="aspect-square flex items-center justify-center">
                 <div className={`w-32 h-32 bg-gradient-to-br ${steps[activeStep].color} rounded-full flex items-center justify-center shadow-2xl animate-pulse`}>
-                  <steps[activeStep].icon className="h-16 w-16 text-white" />
+                  {React.createElement(steps[activeStep].icon, { className: "h-16 w-16 text-white" })}
                 </div>
               </div>
               <div className="mt-6 text-center">

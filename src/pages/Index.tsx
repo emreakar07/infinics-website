@@ -1,5 +1,6 @@
 
 import Hero from "@/components/Hero";
+import DemoShowcase from "@/components/DemoShowcase";
 import ValuePropositions from "@/components/ValuePropositions";
 import Process from "@/components/Process";
 import Solutions from "@/components/Solutions";
@@ -12,6 +13,7 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Hero />
+      <DemoShowcase />
       <ValuePropositions />
       <Process />
       <Solutions />

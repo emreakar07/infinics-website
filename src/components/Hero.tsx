@@ -36,14 +36,24 @@ const Hero = () => {
           From concept to production in <span className="font-bold text-cyan-600">14 days</span>.
         </p>
         
-        {/* CTA Button */}
-        <div className="animate-fade-in">
+        {/* CTA Buttons */}
+        <div className="animate-fade-in flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 
             size="lg" 
             className="bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 transform"
           >
             <Zap className="mr-2 h-5 w-5" />
             Start Your Project
+          </Button>
+          <Button 
+            size="lg"
+            variant="outline"
+            className="border-2 px-8 py-4 text-lg font-semibold transition-all duration-500 hover:scale-105 transform"
+            onClick={() => {
+              document.querySelector('#demo-section')?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Try Live Demo
           </Button>
         </div>
         
