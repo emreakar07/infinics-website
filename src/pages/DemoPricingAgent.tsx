@@ -122,6 +122,44 @@ const industryTemplates: IndustryTemplate[] = [
       "Apply volume discounts based on number of licenses",
       "Include applicable taxes based on customer location"
     ]
+  },
+  {
+    name: "Machine & Machinery Parts",
+    icon: "⚙️",
+    rules: [
+      "Ask for specific part numbers or machine model",
+      "Ask for quantity needed (apply bulk discounts for 10+ units)",
+      "Check if parts are OEM or aftermarket",
+      "Inquire about material specifications (steel, aluminum, composite)",
+      "Ask about required certifications or standards (ISO, CE, UL)",
+      "Apply volume pricing tiers (1-9, 10-49, 50-99, 100+)",
+      "Add express manufacturing surcharge for rush orders",
+      "Include packaging and handling fees based on part size/weight",
+      "Check warranty requirements (standard 6 months, extended available)",
+      "Apply industry-specific markups (aerospace 40%, automotive 25%, general 20%)",
+      "Consider lead time pricing (in-stock, 2-4 weeks, 6-8 weeks custom)",
+      "Add technical support package options"
+    ]
+  },
+  {
+    name: "Logistics",
+    icon: "🚚",
+    rules: [
+      "Ask for shipment origin and destination (city/country)",
+      "Ask for cargo type (general, refrigerated, hazardous, fragile)",
+      "Inquire about weight and dimensions (calculate volumetric weight)",
+      "Check shipping method (air freight, sea freight, ground, express)",
+      "Ask about delivery timeline requirements (standard, expedited, same-day)",
+      "Apply distance-based pricing zones",
+      "Add fuel surcharge based on current fuel prices (5-15%)",
+      "Include customs clearance fees for international shipments",
+      "Apply special handling fees for oversized or hazardous materials",
+      "Check insurance requirements (basic coverage or full value)",
+      "Add warehousing fees if storage needed",
+      "Apply peak season surcharges (holidays, shopping seasons)",
+      "Include last-mile delivery options and pricing",
+      "Offer consolidation discounts for multiple shipments"
+    ]
   }
 ];
 
