@@ -94,7 +94,7 @@ const agentCategories: AgentCategory[] = [
   },
   {
     title: "HR & People Management",
-    subtitle: "Transform your HR processes with AI-powered people solutions",
+    subtitle: "Streamline your HR processes with tailor-made digital solutions",
     color: "from-purple-500 to-pink-500",
     bgGradient: "from-purple-50 to-pink-50",
     agents: [
@@ -338,7 +338,7 @@ const agentCategories: AgentCategory[] = [
   },
   {
     title: "Procurement & Supply Chain",
-    subtitle: "Optimize procurement processes with intelligent automation",
+    subtitle: "Optimize procurement with custom-built automation",
     color: "from-green-500 to-emerald-500",
     bgGradient: "from-green-50 to-emerald-50",
     agents: [
@@ -523,7 +523,7 @@ const agentCategories: AgentCategory[] = [
   },
   {
     title: "Sales & Marketing",
-    subtitle: "Accelerate growth with AI-powered sales and marketing agents",
+    subtitle: "Accelerate growth with fast, custom-built sales and marketing tools",
     color: "from-orange-500 to-red-500",
     bgGradient: "from-orange-50 to-red-50",
     agents: [
@@ -774,10 +774,10 @@ const AgentProducts = () => {
             Our AI Agents
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
-            Complete AI Agent Suite
+            Tailor-Made Solution Suite
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            From operations to HR, procurement to sales - we have AI agents ready to transform every aspect of your business
+            From operations to HR, procurement to sales – explore how our custom-built solutions can transform every aspect of your business.
           </p>
         </div>
 

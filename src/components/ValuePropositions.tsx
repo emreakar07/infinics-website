@@ -55,13 +55,13 @@ const ValuePropositions = () => {
             Proven Business Results
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 md:mb-6">
-            Need a Custom AI Agent?
+            Need a Custom Solution?
             <span className="block bg-gradient-to-r from-cyan-600 to-green-600 bg-clip-text text-transparent">
               Choose Infinics
             </span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">
-            Measurable results that transform your business from day one
+            Measurable results from tailor-made software, delivered in 15 days.
           </p>
         </div>
         

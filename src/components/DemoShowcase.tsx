@@ -51,10 +51,10 @@ const DemoShowcase = () => {
             Live Demo
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
-            Try Our AI Agents - Live Demo
+            See Our Custom Solutions – Live Demo
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Experience two of our most popular AI agents in action. These interactive demos showcase how our custom AI solutions can transform your business operations.
+            Experience two of our most popular tailor-made solutions in action. These demos showcase how fast, custom-built software can transform your operations.
           </p>
         </div>
 

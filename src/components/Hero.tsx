@@ -35,7 +35,7 @@ const Hero = () => {
             {/* Main headline with better visual hierarchy */}
             <div className="text-center">
               <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent leading-tight">
-                AI Agent Dev Studio
+                Tailor-Made Software Studio
               </h1>
             </div>
           </div>
