@@ -35,7 +35,7 @@ const Hero = () => {
                 <span className="font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent">AI-Focused</span>
                 <span className="font-normal bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent"> Digital Transformation, Built for You</span>
               </h1>
-              <p className="text-lg md:text-xl text-gray-800 mt-6 max-w-4xl mx-auto leading-relaxed">
+                <p className="text-lg md:text-xl text-gray-800 mt-6 w-[70%] mx-auto leading-relaxed">
                 Your processes are unique — so are our solutions. We design and deliver AI-powered SaaS tailored to your business.
               </p>
             </div>
