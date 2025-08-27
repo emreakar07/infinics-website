@@ -3,11 +3,11 @@ import { Zap, Code2, Sparkles, ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section className="relative py-20 md:py-32 bg-gradient-to-br from-cyan-50 via-white to-green-50 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-cyan-50 via-white to-blue-50 overflow-hidden">
       {/* Enhanced background decorative elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-20 -right-20 w-72 h-72 bg-gradient-to-br from-cyan-200/40 to-green-200/40 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-gradient-to-tr from-green-200/40 to-cyan-200/40 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -top-20 -right-20 w-72 h-72 bg-gradient-to-br from-cyan-200/40 to-blue-200/40 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute -bottom-20 -left-20 w-72 h-72 bg-gradient-to-tr from-blue-200/40 to-cyan-200/40 rounded-full blur-3xl animate-pulse"></div>
         
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" 
@@ -19,24 +19,24 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-5xl mx-auto">
-          {/* Refined header with logo and company name */}
-          <div className="mb-12 animate-fade-in">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <img 
-                src="/lovable-uploads/ae62675a-c666-4cfd-aca4-5a928cd05760.png" 
-                alt="Infinics Logo" 
-                className="h-12 w-auto"
-              />
-              <h2 className="text-[1.75rem] font-extrabold bg-gradient-to-r from-cyan-700 via-slate-700 to-green-700 bg-clip-text text-transparent tracking-tight">
-                Infinics
-              </h2>
-            </div>
+                     {/* Company logo */}
+           <div className="mb-8 animate-fade-in">
+             <div className="flex items-center justify-center mb-4">
+               <img 
+                 src="/infinics-logo.png" 
+                 alt="Infinics Logo" 
+                 className="h-16 md:h-16 w-auto"
+               />
+             </div>
             
             {/* Main headline with better visual hierarchy */}
             <div className="text-center">
-              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-green-600 bg-clip-text text-transparent leading-tight">
-                Tailor-Made Software Studio
+              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent leading-tight">
+                AI-Focused Digital Transformation, Built for You
               </h1>
+              <p className="text-xl md:text-2xl text-gray-600 mt-6 max-w-4xl mx-auto">
+                Your processes are unique — so are our solutions. We design and deliver AI-powered SaaS tailored to your business.
+              </p>
             </div>
           </div>
           
@@ -48,9 +48,9 @@ const Hero = () => {
             </div>
             <ArrowRight className="h-4 w-4 text-gray-400" />
             <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-green-600" />
+              <Sparkles className="h-5 w-5 text-blue-600" />
               <span className="text-lg text-gray-600">to production in</span>
-              <span className="font-bold text-2xl bg-gradient-to-r from-cyan-600 to-green-600 bg-clip-text text-transparent">14 days</span>
+              <span className="font-bold text-2xl bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">14 days</span>
             </div>
           </div>
           
@@ -58,7 +58,7 @@ const Hero = () => {
           <div className="animate-fade-in flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-cyan-500 to-green-500 hover:from-cyan-600 hover:to-green-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform group"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform group"
               onClick={() => {
                 document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
@@ -82,15 +82,15 @@ const Hero = () => {
           {/* Enhanced trust indicators with icons */}
           <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-600 animate-fade-in">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
               <span>No hidden costs</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
               <span>14-day guarantee</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
               <span>Custom solutions only</span>
             </div>
           </div>
@@ -98,12 +98,12 @@ const Hero = () => {
           {/* Stats badges - removed client satisfaction */}
           <div className="mt-12 flex justify-center gap-12 animate-fade-in">
             <div className="flex flex-col items-center">
-              <div className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-green-600 bg-clip-text text-transparent">50+</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">50+</div>
               <div className="text-sm text-gray-600">AI Agents Deployed</div>
             </div>
             <div className="h-12 w-px bg-gradient-to-b from-transparent via-gray-300 to-transparent"></div>
             <div className="flex flex-col items-center">
-              <div className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-green-600 bg-clip-text text-transparent">24/7</div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">24/7</div>
               <div className="text-sm text-gray-600">Support Available</div>
             </div>
           </div>

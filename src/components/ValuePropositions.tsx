@@ -124,11 +124,6 @@ const ValuePropositions = () => {
         {/* Bottom CTA */}
         <div className="text-center animate-fade-in" style={{ animationDelay: '0.8s' }}>
           <div className="inline-flex items-center gap-4 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-gray-200">
-            <div className="flex -space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">A</div>
-              <div className="w-8 h-8 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center text-white text-xs font-bold">B</div>
-              <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-white text-xs font-bold">C</div>
-            </div>
             <span className="text-gray-700 font-medium">AI-powered solutions for real business problems.</span>
           </div>
         </div>
