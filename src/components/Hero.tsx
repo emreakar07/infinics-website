@@ -30,12 +30,14 @@ const Hero = () => {
              </div>
             
             {/* Main headline with better visual hierarchy */}
-            <div className="text-center">
-              <h1 className="text-4xl md:text-6xl leading-tight">
-                <span className="font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent">AI-Focused</span>
-                <span className="font-normal bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent"> Digital Transformation, Built for You</span>
+                        <div className="text-center">
+              <h1 className="text-4xl md:text-6xl leading-tight max-w-[1100px] mx-auto bg-gradient-to-r from-blue-500 via-blue-600 to-blue-800 bg-clip-text text-transparent" style={{ letterSpacing: '-0.5px' }}>
+                <span className="font-bold">AI-Focused</span>
+                <span className="font-semibold"> Digital Transformation,</span>
+                <br />
+                <span className="font-semibold">Built for You</span>
               </h1>
-                <p className="text-lg md:text-xl text-gray-800 mt-6 w-[70%] mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-800 mt-6 w-[70%] mx-auto leading-relaxed">
                 Your processes are unique — so are our solutions. We design and deliver AI-powered SaaS tailored to your business.
               </p>
             </div>
