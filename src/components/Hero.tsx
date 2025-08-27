@@ -12,7 +12,7 @@ const Hero = () => {
         {/* Subtle grid pattern */}
         <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" 
              style={{
-               backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(0 0 0 / 0.04)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`
+               backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(0 0 0 / 0.02)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e")`
              }}
         />
       </div>
@@ -31,10 +31,11 @@ const Hero = () => {
             
             {/* Main headline with better visual hierarchy */}
             <div className="text-center">
-              <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent leading-tight">
-                AI-Focused Digital Transformation, Built for You
+              <h1 className="text-4xl md:text-6xl leading-tight">
+                <span className="font-bold bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent">AI-Focused</span>
+                <span className="font-normal bg-gradient-to-r from-cyan-600 via-blue-600 to-blue-700 bg-clip-text text-transparent"> Digital Transformation, Built for You</span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mt-6 max-w-4xl mx-auto">
+              <p className="text-lg md:text-xl text-gray-800 mt-6 max-w-4xl mx-auto leading-relaxed">
                 Your processes are unique — so are our solutions. We design and deliver AI-powered SaaS tailored to your business.
               </p>
             </div>
@@ -58,7 +59,7 @@ const Hero = () => {
           <div className="animate-fade-in flex flex-col sm:flex-row gap-4 justify-center items-center mb-10">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform group"
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white px-12 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 transform group"
               onClick={() => {
                 document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
@@ -69,7 +70,7 @@ const Hero = () => {
             <Button 
               size="lg"
               variant="outline"
-              className="border-2 px-8 py-4 text-lg font-semibold transition-all duration-300 hover:scale-105 transform hover:border-cyan-500 hover:text-cyan-600 group"
+              className="border-2 border-gray-300 hover:border-cyan-500 px-12 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 transform hover:text-cyan-600 group bg-white/80 backdrop-blur-sm"
               onClick={() => {
                 document.querySelector('#demo-section')?.scrollIntoView({ behavior: 'smooth' });
               }}
