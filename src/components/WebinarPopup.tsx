@@ -101,16 +101,22 @@ const WebinarPopup = ({ isOpen, onClose }: WebinarPopupProps) => {
 
         <div className="space-y-6">
           {/* Webinar Info */}
-          <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-100">
+                      <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-6 border border-cyan-100">
             <div className="flex items-start justify-between mb-4">
               <div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  AI-Powered Business Transformation: Real Results in 14 Days
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  Otelcilik Sektöründe İşe Alım Süreçlerini Nasıl Kolayca Yönetebilirsiniz?
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  Discover how companies are achieving 5x ROI with custom AI solutions. 
-                  Learn our proven methodology and see live demos of successful implementations.
-                </p>
+                <div className="text-gray-600 leading-relaxed space-y-2">
+                  <p>
+                    Otel sektöründe işe alım çoğu zaman telefonlar, Excel dosyaları ve dağınık notlar arasında kayboluyor. 
+                    Adaylar sürecin içinde kayboluyor, departmanlar arasında iletişim kopukluğu yaşanıyor.
+                  </p>
+                  <p>
+                    Bu ücretsiz webinarda oteller için özel geliştirdiğimiz <strong>HR Candidate Tracking System</strong> ile 
+                    işe alım süreçlerinizi nasıl optimize edebileceğinizi öğreneceksiniz.
+                  </p>
+                </div>
               </div>
               <Badge className="bg-green-100 text-green-700 whitespace-nowrap">
                 Free Event
@@ -121,11 +127,11 @@ const WebinarPopup = ({ isOpen, onClose }: WebinarPopupProps) => {
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-cyan-600" />
-                <span className="font-semibold">14 Eylül 2024</span>
+                <span className="font-semibold">15 Eylül 2025</span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4 text-cyan-600" />
-                <span className="font-semibold">14:00 - 15:30</span>
+                <span className="font-semibold">14:00 - 15:00</span>
               </div>
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-cyan-600" />
@@ -136,12 +142,17 @@ const WebinarPopup = ({ isOpen, onClose }: WebinarPopupProps) => {
             {/* What you'll learn */}
             <div className="mt-4 pt-4 border-t border-cyan-200">
               <h4 className="font-semibold text-gray-900 mb-2">Bu Webinarda Öğrenecekleriniz:</h4>
-              <ul className="space-y-1 text-sm text-gray-700">
-                <li>• AI implementation için doğru use case'leri nasıl belirlersiniz</li>
-                <li>• 14 günde nasıl custom AI çözümü geliştirirsiniz</li>
-                <li>• ROI'yi maksimize eden stratejiler</li>
-                <li>• Gerçek müşteri başarı hikayeleri</li>
+              <ul className="space-y-2 text-sm text-gray-700">
+                <li>• Tüm adayları tek panelden nasıl yönetebileceğinizi</li>
+                <li>• Doğru adayı doğru departmana anında nasıl iletebileceğinizi</li>
+                <li>• Aday kayıplarını nasıl önleyebileceğinizi</li>
+                <li>• İşe alım sürecinde nasıl zaman kazanabileceğinizi</li>
               </ul>
+              <div className="mt-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                <p className="text-sm text-orange-700 font-medium">
+                  👉 Katılım ücretsizdir, kontenjan sınırlıdır.
+                </p>
+              </div>
             </div>
           </div>
 

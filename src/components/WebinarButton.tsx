@@ -23,7 +23,7 @@ const WebinarButton = () => {
           {/* Button Content */}
           <div className="flex items-center gap-2">
             <Calendar className="h-5 w-5 group-hover:rotate-12 transition-transform" />
-            <span className="hidden sm:inline">Free Webinar</span>
+            <span className="hidden sm:inline">Join The Webinar</span>
             <span className="sm:hidden">Webinar</span>
             <Sparkles className="h-4 w-4 group-hover:rotate-12 transition-transform" />
           </div>
